@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/google_sign_in/presentation/pages/google_sign_in_page.dart';
 import 'package:frontend/features/login_page/pages/login_page.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2)).then((value) => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginPage())));
+        context, MaterialPageRoute(builder: (context) => GoogleSignInPage())));
   }
 
   @override

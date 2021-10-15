@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "928468035994",
+    "project_id": "ihart-f2f90",
+    "storage_bucket": "ihart-f2f90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928468035994:android:657c1ba0750d8c50927223",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928468035994-4f5b8ocdf34klnh0nib0n0qlrg1t5l3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "1eab6a582aba96ad70388b3f954977d7e4011f07"
+          }
+        },
+        {
+          "client_id": "928468035994-aqmepljbphtps9oea7c19d7dhph7o7k1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNYNqtdmAt4tkno0a5DztZVpF8vUHwm_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928468035994-aqmepljbphtps9oea7c19d7dhph7o7k1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
