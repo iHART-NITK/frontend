@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
-  Future<http.Response> get(url, {userSpecific = true}) async {
+  Future<http.Response> get(url, {user_specific = true}) async {
     var _addr;
-    String host = "127.0.0.1";
-    String port = "8000";
+    String host = "localhost";
+    String port = "3000";
+    int user_id = 2;
 
-    int userID = 2;
     String token = "98826630a37d2b6350c78e55d0dc4419f0491069";
-    if (userSpecific)
-      _addr = Uri.parse('http://$host:$port/user/$userID/$url');
+    if (user_specific)
+      _addr = Uri.parse('http://$host:$port/api/user/$user_id$url');
     else
-      _addr = Uri.parse('http://$host:$port/$url');
+      _addr = Uri.parse('http://$host:$port/api$url');
     var response =
         await http.get(_addr, headers: {'Authorization': 'Token $token'});
     debugPrint("[API REQ] $_addr ${response.statusCode}");
