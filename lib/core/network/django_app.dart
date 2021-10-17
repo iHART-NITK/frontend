@@ -8,7 +8,7 @@ class DjangoApp {
     String port = "3000";
     int user_id = 2;
 
-    String token = "265bcfe1d1e933e38b00e9c28c4ee42a8e765156";
+    String token = "98826630a37d2b6350c78e55d0dc4419f0491069";
     if (user_specific)
       _addr = Uri.parse('http://$host:$port/api/user/$user_id$url');
     else
