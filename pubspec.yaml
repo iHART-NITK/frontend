@@ -35,6 +35,8 @@ dependencies:
   google_sign_in:
   dartz:
   flutter_signin_button:
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
