@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2)).then((value) => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => GetMed())));
+        context, MaterialPageRoute(builder: (context) => LoginPage())));
   }
 
   @override
