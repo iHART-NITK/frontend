@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/emergency/presentation/get_locations.dart';
+import 'package:frontend/features/medical_history/presentation/get_Medical-history.dart';
 import 'package:frontend/features/google_sign_in/presentation/pages/google_sign_in_page.dart';
 import 'package:frontend/features/login_page/pages/login_page.dart';
 
@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 2)).then((value) => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => GetLocations())));
+        context, MaterialPageRoute(builder: (context) => GetMed())));
   }
 
   @override
