@@ -1,13 +1,15 @@
 class HistoryModel {
-  Map<String, String> get_medical_objects_from_json(dynamic j) {
+  List<dynamic> get_medical_objects_from_json(dynamic j) {
     print(j);
     print(j.runtimeType);
-    Map<String, String> medical = new Map();
-    j.forEach((key, value) {
-      print("${key}: ${value}");
-      medical[key] = value;
+    List<dynamic> medical = [];
+    j.forEach((history) {
+      medical.add({
+        "category": history["category"],
+        "description": history["description"]
+      });
     });
-    print(medical.keys);
+
     return medical;
   }
 }

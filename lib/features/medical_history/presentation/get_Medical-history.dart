@@ -21,14 +21,15 @@ class _GetMedState extends State<GetMed> {
           List<Widget> children;
           if (snapshot.hasData) {
             children = <Widget>[];
-            snapshot.data?.forEach((key, value) {
+            snapshot.data?.forEach((history) {
               children.add(
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: "${key}: ${value}",
+                      labelText: 'Category: ${history["category"]}\nDescription: ${history["description"]}',
+                      
                     ),
                   ),
                 ),
