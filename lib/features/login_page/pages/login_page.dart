@@ -109,7 +109,7 @@ class _LoginPage extends State<LoginPage> {
 	                    ),
 	                  )),
 	                  SizedBox(height: 70,),
-	                  FadeAnimation(1.5, Text("Forgot Password?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
+	                 
 	                ],
 	              ),
 	            )
