@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/network/django_app.dart';
 import 'package:frontend/features/emergency/data/locations.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class GetLocations extends StatefulWidget {
   @override
@@ -7,45 +11,86 @@ class GetLocations extends StatefulWidget {
 }
 
 class _GetLocationsState extends State<GetLocations> {
+  ValueNotifier currentLocationSelected = ValueNotifier("");
+  TextEditingController _controller = new TextEditingController();
+
+  Future<Map<String, String>> getLocations() {
+    Location location = new Location();
+    final Future<Map<String, String>> _hash = location.getLocations();
+    return _hash;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Location location = new Location();
-    final Future<dynamic> _hash = location.getLocations();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Emergency Locations'),
         backgroundColor: Color.fromRGBO(181, 7, 23, 1),
       ),
-      body: FutureBuilder<dynamic>(
-          future: _hash, // a previously-obtained Future<String> or null
+      body: FutureBuilder<Map<String, String>>(
+          future:
+              getLocations(), // a previously-obtained Future<String> or null
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             List<Widget> children;
             if (snapshot.hasData) {
-              children = <Widget>[];
-              snapshot.data?.forEach((key, value) {
-                children.add(Container(
-                  margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(5.0),
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    boxShadow: [
-                      new BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5.0,
-                      ),
-                    ],
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-                    ),
-                    title: Text(
-                      value,
-                    ),
-                  ),
+              List<DropdownMenuItem<String>> list =
+                  new List.empty(growable: true);
+              print(snapshot.data);
+
+              snapshot.data.forEach((key, label) {
+                currentLocationSelected.value = key;
+                list.add(DropdownMenuItem<String>(
+                  child: Text(label.toString()),
+                  value: key,
                 ));
               });
+
+              children = <Widget>[
+                ValueListenableBuilder(
+                  valueListenable: currentLocationSelected,
+                  builder: (context, _, __) {
+                    return DropdownButton<String>(
+                      value: currentLocationSelected.value,
+                      items: list,
+                      hint: Text('Select Location'),
+                      onChanged: (value) {
+                        currentLocationSelected.value = value;
+                      },
+                    );
+                  },
+                ),
+                TextFormField(
+                  controller: _controller,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.newline,
+                  minLines: 1,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter a reason.'),
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      final response = await DjangoApp()
+                          .post(url: "/emergency/create/", data: {
+                        "location": currentLocationSelected.value,
+                        "reason": _controller.text,
+                        "status": "R"
+                      });
+                      if (response.statusCode == 200) {
+                        showTopSnackBar(
+                            context,
+                            CustomSnackBar.success(
+                                message: "Emergency has been raised."));
+                      } else {
+                        showTopSnackBar(
+                            context,
+                            CustomSnackBar.error(
+                                message: "Some error occurred. Call HCC."));
+                      }
+                    },
+                    child: Text("Raise Emergency"))
+              ];
             } else if (snapshot.hasError) {
               children = <Widget>[
                 const Icon(
@@ -71,9 +116,7 @@ class _GetLocationsState extends State<GetLocations> {
                 )
               ];
             }
-            return ListView(
-              controller: ScrollController(),
-              padding: const EdgeInsets.symmetric(vertical: 15),
+            return Column(
               children: children,
             );
           }),
