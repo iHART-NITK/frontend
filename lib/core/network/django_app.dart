@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
-  Future<http.Response> get(url, {user_specific = true}) async {
+  Future<http.Response> get(url, {user_specific = false}) async {
     var _addr;
     String host = "localhost";
     String port = "3000";
