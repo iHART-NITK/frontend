@@ -1,5 +1,5 @@
 class HistoryModel {
-  List<dynamic> get_medical_objects_from_json(dynamic j) {
+  List<dynamic> getLocationObjectsFromJson(dynamic j) {
     print(j);
     print(j.runtimeType);
     List<dynamic> medical = [];

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/network/django_app.dart';
 import 'package:frontend/features/emergency/data/locations.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class GetLocations extends StatefulWidget {

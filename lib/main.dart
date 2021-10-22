@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
-import 'package:frontend/features/medical_history/presentation/get_Medical-history.dart';
-import 'package:frontend/features/google_sign_in/presentation/pages/google_sign_in_page.dart';
 import 'package:frontend/features/login_page/pages/login_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -13,10 +11,10 @@ void main() async {
   Hive.registerAdapter(UserAdapter());
   //Important Hive Setup Ended!
   //Hive usage shown below, remove this when you understand!
-  var box = await Hive.openBox<User>('user');
-  print(box.values);
-  box.add(User(1, 'CD'));
-  print(box.values);
+  // var box = await Hive.openBox<User>('user');
+  // print(box.values);
+  // box.add(User(1, 'CD'));
+  // print(box.values);
   //Hive usage ended
   runApp(MyApp());
 }
@@ -39,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
+    super.initState();
     Future.delayed(Duration(seconds: 2)).then((value) => Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginPage())));
   }

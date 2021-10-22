@@ -5,12 +5,12 @@ import '../../../core/network/django_app.dart';
 class Location {
   Future<Map<String, String>> getLocations() async {
     final response =
-        await DjangoApp().get('/emergency/locations', user_specific: false);
-    var location_hash =
+        await DjangoApp().get('/emergency/locations', userSpecific: false);
+    var locationHash =
         convert.jsonDecode(response.body) as Map<String, dynamic>;
-    print(location_hash);
+    print(locationHash);
     LocationModel m = new LocationModel();
-    Map<String, String> x = m.get_location_objects_from_json(location_hash);
+    Map<String, String> x = m.getLocationObjectsFromJson(locationHash);
     return x;
   }
 }
