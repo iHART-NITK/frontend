@@ -6,9 +6,9 @@ class DjangoApp {
     var _addr;
     String host = "localhost";
     String port = "3000";
-    int userId = 2;
+    int userId = 11;
 
-    String token = "265bcfe1d1e933e38b00e9c28c4ee42a8e765156";
+    String token = "2d531831079a434267763ef7132804c89c469cc1";
     if (userSpecific)
       _addr = Uri.parse('http://$host:$port/api/user/$userId$url');
     else
@@ -24,7 +24,7 @@ class DjangoApp {
     String host = "localhost";
     String port = "3000";
 
-    String token = "265bcfe1d1e933e38b00e9c28c4ee42a8e765156";
+    String token = "2d531831079a434267763ef7132804c89c469cc1";
     _addr = Uri.parse('http://$host:$port/api$url');
     var response = await http.post(_addr,
         headers: {'Authorization': 'Token $token'}, body: data);

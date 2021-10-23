@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
-import 'package:frontend/features/login_page/pages/login_page.dart';
+import 'features/emergency/presentation/get_locations.dart';
+import 'features/google_sign_in/data/model/user_model.dart';
+import 'features/home_page/pages/home_page.dart';
+import 'features/login_page/pages/login_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'features/user_profile/pages/user_page.dart';
 
 void main() async {
   //Important Hive Setup!
@@ -25,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'iHART',
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -38,8 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2)).then((value) => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginPage())));
+    Future.delayed(Duration(seconds: 2)).then((value) =>
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage())));
   }
 
   @override

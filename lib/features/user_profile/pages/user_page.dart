@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/user_profile/data/fetch_user.dart';
+import '/features/user_profile/data/fetch_user.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             Container(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(150),
-                                child: Image.asset('assets/lol.png'),
+                                child: Image.asset('assets/iHART-logo.png'),
                               ),
                               width: 150,
                               height: 150,
