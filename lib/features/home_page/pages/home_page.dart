@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/home_page/data/fetchNumAppointments.dart';
-import 'package:frontend/features/user_profile/pages/user_page.dart';
+import '/features/home_page/data/fetchNumEmergency.dart';
+import '/features/home_page/data/fetchNumAppointments.dart';
+import '/features/home_page/data/fetchNumTransactions.dart';
+import '/features/user_profile/pages/user_page.dart';
 import '/features/emergency/presentation/get_locations.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,9 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Future<int> numAppointments = FetchNumAppointments().get();
   @override
   Widget build(BuildContext context) {
+    final Future<int> numAppointments = FetchNumAppointments().get();
+    final Future<int> numTransactions = FetchNumTransactions().get();
+    final Future<int> numEmergency = FetchNumEmergency().get();
     return Scaffold(
       appBar: AppBar(
         title: Text("iHART"),
@@ -63,14 +67,81 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+            ),
+            InkWell(
+              onTap: () {
+                print("Transaction Page in progress!");
+              },
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                        title: Text("Transactions"),
+                        subtitle: FutureBuilder(
+                            future: numTransactions,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return LinearProgressIndicator();
+                              }
+                              Text output =
+                                  new Text("No recorded transactions!");
+                              if (snapshot.hasData) {
+                                output = Text(
+                                    "${snapshot.data} transactions(s) made with the HCC");
+                              } else if (snapshot.hasError) {
+                                output =
+                                    Text("Error while fetching transactions!");
+                              }
+                              return output;
+                            }))
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                print("Emergency Page in progress!");
+              },
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                        title: Text("Emergencies"),
+                        subtitle: FutureBuilder(
+                            future: numEmergency,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return LinearProgressIndicator();
+                              }
+                              Text output =
+                                  new Text("No recorded emergencies!");
+                              if (snapshot.hasData) {
+                                output = Text(
+                                    "${snapshot.data} emergency requests(s) made to the HCC");
+                              } else if (snapshot.hasError) {
+                                output =
+                                    Text("Error while fetching emergencies!");
+                              }
+                              return output;
+                            }))
+                  ],
+                ),
+              ),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => GetLocations()));
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GetLocations()))
+              .then((_) => {setState(() {})});
         },
         child: Icon(Icons.health_and_safety),
         backgroundColor: Colors.redAccent[700],

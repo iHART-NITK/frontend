@@ -87,6 +87,7 @@ class _GetLocationsState extends State<GetLocations> {
                             CustomSnackBar.error(
                                 message: "Some error occurred. Call HCC."));
                       }
+                      Navigator.pop(context);
                     },
                     child: Text("Raise Emergency"))
               ];
