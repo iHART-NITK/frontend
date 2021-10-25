@@ -8,9 +8,12 @@ class User extends HiveObject {
   late int id;
   @HiveField(1)
   late String token;
+  @HiveField(2)
+  late String type;
 
-  User(int id, String token) {
+  User(int id, String token, String type) {
     this.id = id;
     this.token = token;
+    this.type = type;
   }
 }
