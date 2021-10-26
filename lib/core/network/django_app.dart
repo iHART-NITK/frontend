@@ -3,6 +3,9 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
+  String host = "localhost";
+  String port = "3000";
+
   Future<http.Response> get(url, {userSpecific = false}) async {
     var _addr;
     var box = Hive.box('user');
