@@ -9,7 +9,6 @@ class FetchUserData {
     Map<String, dynamic> decodedResponse =
         convert.jsonDecode(_response.body) as Map<String, dynamic>;
 
-    print(decodedResponse);
     return decodedResponse;
   }
 }

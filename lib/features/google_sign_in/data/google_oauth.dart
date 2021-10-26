@@ -75,6 +75,8 @@ class GoogleOAuth {
           String password = googleSignIn.currentUser!.id;
           String phone = "+919900512512";
           String email = googleSignIn.currentUser!.email;
+          String photoURL = googleSignIn.currentUser!.photoUrl ??
+              "https://www.gravatar.com/avatar/?d=mp";
           String customerId = googleSignIn.currentUser!.id;
           String gender = "M";
           String userType = checkUserType(email);
@@ -89,7 +91,8 @@ class GoogleOAuth {
             "last_name": lastName,
             "gender": gender,
             "customer_id": customerId,
-            "user_type": userType
+            "user_type": userType,
+            "photo": photoURL
           };
           var _regResponse =
               await _djangoApp.postAnonymous(url: '/register/', data: data);

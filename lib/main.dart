@@ -52,6 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
         Map<String, dynamic> data = {"id": box.get(0).id.toString()};
         var _response =
             await _djangoApp.post(url: "/verify-token/", data: data);
+        if (_response.statusCode != 200) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
+          return;
+        }
         bool decodedResponse = convert.jsonDecode(_response.body) as bool;
         if (decodedResponse) {
           Navigator.pushReplacement(
