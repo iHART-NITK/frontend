@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:frontend/features/emergency/presentation/get_locations.dart';
 import 'package:frontend/features/google_sign_in/data/google_oauth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -15,16 +14,14 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   @override
   Widget build(BuildContext context) {
     GoogleOAuth googleOAuth = new GoogleOAuth(
-      googleSignIn: new GoogleSignIn(),
+      googleSignIn: new GoogleSignIn(scopes: [
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      ]),
     );
-    return SignInButton(
-      Buttons.Google,
-      onPressed: () async {
-        print('Google Sign in Button Pressed!');
-        // googleOAuth.signInAction();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => GetLocations()));
-      },
-    );
+    return SignInButton(Buttons.Google, onPressed: () async {
+      print('Google Sign in Button Pressed!');
+      await googleOAuth.signInAction(context);
+    });
   }
 }
