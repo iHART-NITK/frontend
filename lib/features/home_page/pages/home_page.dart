@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/medical_history/presentation/get_Medical-history.dart';
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';
@@ -17,6 +18,35 @@ class _HomePageState extends State<HomePage> {
     final Future<int> numTransactions = FetchNumTransactions().get();
     final Future<int> numEmergency = FetchNumEmergency().get();
     return Scaffold(
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          DrawerHeader(
+              margin: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('assets/iHART-logo.png'))),
+              child: Stack(children: <Widget>[
+                Positioned(
+                    bottom: 12.0,
+                    left: 16.0,
+                    child: Text("iHART",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w500))),
+              ])),
+          ListTile(
+            title: Text('Medical History'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => GetMed()));
+            },
+          )
+        ],
+      )),
       appBar: AppBar(
         title: Text("iHART"),
         centerTitle: true,
