@@ -7,7 +7,7 @@ class DjangoApp {
     var _addr;
     var box = Hive.box('user');
     String host = "localhost";
-    String port = "3000";
+    String port = "8000";
 
     int userId = box.get(0).id;
     String token = box.get(0).token;
@@ -25,7 +25,7 @@ class DjangoApp {
     var _addr;
     var box = Hive.box('user');
     String host = "localhost";
-    String port = "3000";
+    String port = "8000";
 
     String token = box.get(0).token;
     _addr = Uri.parse('http://$host:$port/api$url');
@@ -38,7 +38,7 @@ class DjangoApp {
   Future<http.Response> postAnonymous({url, data}) async {
     var _addr;
     String host = "localhost";
-    String port = "3000";
+    String port = "8000";
 
     _addr = Uri.parse('http://$host:$port/api$url');
     var response = await http.post(_addr, body: data);

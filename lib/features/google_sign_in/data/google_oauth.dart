@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/network/django_app.dart';
 import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
+import 'package:frontend/features/home_page/pages/admin_home_page.dart';
 import 'package:frontend/features/home_page/pages/home_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dartz/dartz.dart';
@@ -51,6 +52,7 @@ class GoogleOAuth {
             box.add(User(decodedResponse["id"], decodedResponse["token"],
                 decodedResponse["user_type"]));
           } else {
+            print(box.get(0).id);
             box.putAt(
                 0,
                 User(decodedResponse["id"], decodedResponse["token"],
@@ -78,6 +80,7 @@ class GoogleOAuth {
           String customerId = googleSignIn.currentUser!.id;
           String gender = "M";
           String userType = checkUserType(email);
+          String? photoURL = googleSignIn.currentUser!.photoUrl;
 
           Map<String, dynamic> data = {
             "username": username,
@@ -89,7 +92,8 @@ class GoogleOAuth {
             "last_name": lastName,
             "gender": gender,
             "customer_id": customerId,
-            "user_type": userType
+            "user_type": userType,
+            "photoURL": photoURL
           };
           var _regResponse =
               await _djangoApp.postAnonymous(url: '/register/', data: data);
@@ -102,8 +106,12 @@ class GoogleOAuth {
               decodedRegResponse["user_type"]));
           print("Added to box!");
         }
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        if (box.get(0).type == "Stu" || box.get(0).type == "Fac")
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        else
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => AdminHomePage()));    
       }
       return left(null);
     } catch (error) {

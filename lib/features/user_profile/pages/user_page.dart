@@ -31,7 +31,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             Container(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(150),
-                                child: Image.asset('assets/iHART-logo.png'),
+                                child:
+                                    Image.network(snapshot.data?["photoURL"]),
                               ),
                               width: 150,
                               height: 150,
