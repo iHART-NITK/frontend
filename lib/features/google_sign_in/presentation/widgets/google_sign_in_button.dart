@@ -17,6 +17,10 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
       googleSignIn: new GoogleSignIn(scopes: [
         'email',
         'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/user.phonenumbers.read',
+        'https://www.googleapis.com/auth/user.gender.read',
+        'https://www.googleapis.com/auth/user.birthday.read',
+        
       ]),
     );
     return SignInButton(Buttons.Google, onPressed: () async {
