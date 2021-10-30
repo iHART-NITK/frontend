@@ -12,83 +12,88 @@ class _UserProfilePageState extends State<UserProfilePage> {
     FetchUserData _fetchUserData = new FetchUserData();
     final Future<Map<String, dynamic>> _response = _fetchUserData.getData();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("User Page"),
-          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-        ),
-        body: FutureBuilder(
-            future: _response,
-            builder: (BuildContext context,
-                AsyncSnapshot<Map<String, dynamic>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              }
-              return Container(
-                  margin: EdgeInsets.all(10),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(150),
-                                child: Image.network(
-                                  snapshot.data?["photo"],
-                                  fit: BoxFit.cover,
-                                ),
+      appBar: AppBar(
+        title: Text("User Page"),
+        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
+      ),
+      body: FutureBuilder(
+          future: _response,
+          builder: (BuildContext context,
+              AsyncSnapshot<Map<String, dynamic>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+            return Container(
+                margin: EdgeInsets.all(10),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
+                              child: Image.network(
+                                snapshot.data?["photo"],
+                                fit: BoxFit.cover,
                               ),
-                              width: 150,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black, width: 2.0),
-                                  borderRadius: BorderRadius.circular(150)),
+                            ),
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(150)),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ('${snapshot.data?["full_name"]}'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 40),
                             )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
                             children: [
                               Text(
-                                ('${snapshot.data?["full_name"]}'),
+                                "Email Address",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 40),
-                              )
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                              Text(snapshot.data?["email"] ?? "")
                             ],
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  "Email Address",
+                          Column(
+                            children: [
+                              Text("Phone Number",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                Text(snapshot.data?["email"] ?? "")
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("Phone Number",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18)),
-                                Text(snapshot.data?["phone"] ?? "")
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ));
-            }));
+                                      fontSize: 18)),
+                              Text(snapshot.data?["phone"] ?? "")
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ));
+          }),
+      floatingActionButton: IconButton(
+          onPressed: () {
+            print("Logging out...");
+          },
+          icon: Icon(Icons.logout)),
+    );
   }
 }

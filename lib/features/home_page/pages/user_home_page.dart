@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/medical_history/presentation/get_Medical-history.dart';
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';
-import '/features/user_profile/pages/user_page.dart';
-import '/features/emergency/presentation/get_locations.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,8 +38,7 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             title: Text('Medical History'),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => GetMed()));
+              Navigator.pushNamed(context, '/medical-history');
             },
           )
         ],
@@ -54,8 +50,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UserProfilePage()));
+              Navigator.pushNamed(context, '/user-profile');
             },
             icon: Icon(Icons.person_rounded),
             tooltip: "View Profile",
@@ -169,8 +164,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetLocations()))
+          Navigator.pushNamed(context, '/emergency')
               .then((_) => {setState(() {})});
         },
         child: Icon(Icons.health_and_safety),

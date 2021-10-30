@@ -49,7 +49,7 @@ class _AllPrescriptionsPageState extends State<AllPrescriptionsPage> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               PrescriptionPage(
-                                                appointment_no:
+                                                appointmentNo:
                                                     appointment["id"],
                                               )));
                                 },

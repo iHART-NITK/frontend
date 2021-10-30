@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/features/single_prescription/data/get_single_prescription.dart';
 
 class PrescriptionPage extends StatefulWidget {
-  final int appointment_no;
-  PrescriptionPage({Key? key, required this.appointment_no}) : super(key: key);
+  final int appointmentNo;
+  PrescriptionPage({Key? key, required this.appointmentNo}) : super(key: key);
   @override
   _PrescriptionPageState createState() => _PrescriptionPageState();
 }
@@ -12,9 +12,9 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
   @override
   Widget build(BuildContext context) {
     final Future<List<dynamic>> _prescriptionResponse =
-        GetSinglePrescription().getData(widget.appointment_no);
+        GetSinglePrescription().getData(widget.appointmentNo);
     final Future<Map<String, dynamic>> _appointmentResponse =
-        GetAppointmentInfo().getData(widget.appointment_no);
+        GetAppointmentInfo().getData(widget.appointmentNo);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Prescription'),

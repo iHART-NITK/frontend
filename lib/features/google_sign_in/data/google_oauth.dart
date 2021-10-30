@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/network/django_app.dart';
 import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
-import 'package:frontend/features/home_page/pages/admin_home_page.dart';
-import 'package:frontend/features/home_page/pages/home_page.dart';
+import 'package:frontend/features/login_pages/pages/register_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
@@ -60,8 +59,6 @@ class GoogleOAuth {
           }
           print("Added to box!");
         } else {
-          // Todo: Make a separate view to get this info
-          String username = "temp";
           String? displayName = googleSignIn.currentUser!.displayName;
           late String firstName, middleName, lastName;
           if (displayName != null) {
@@ -75,27 +72,28 @@ class GoogleOAuth {
             }
           }
           String password = googleSignIn.currentUser!.id;
-          String phone = "+919900512512";
           String email = googleSignIn.currentUser!.email;
           String photoURL = googleSignIn.currentUser!.photoUrl ??
               "https://www.gravatar.com/avatar/?d=mp";
           String customerId = googleSignIn.currentUser!.id;
-          String gender = "M";
+          // Todo: Add Gender radio button
           String userType = checkUserType(email);
 
           Map<String, dynamic> data = {
-            "username": username,
             "password": password,
-            "phone": phone,
             "email": email,
             "first_name": firstName,
             "middle_name": middleName,
             "last_name": lastName,
-            "gender": gender,
             "customer_id": customerId,
             "user_type": userType,
             "photo": photoURL
           };
+          await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RegisterPage(body: data)));
+
           var _regResponse =
               await _djangoApp.postAnonymous(url: '/register/', data: data);
 
@@ -109,11 +107,9 @@ class GoogleOAuth {
           print("Added to box!");
         }
         if (box.get(0).type == "Stu" || box.get(0).type == "Fac")
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushReplacementNamed(context, '/home');
         else
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => AdminHomePage()));
+          Navigator.pushReplacementNamed(context, '/admin/home');
       }
       return left(null);
     } catch (error) {
@@ -122,5 +118,8 @@ class GoogleOAuth {
     }
   }
 
-  Future<void> _handleSignOut() => googleSignIn.disconnect();
+  Future<void> _handleSignOut() async {
+    googleSignIn.disconnect();
+    await Hive.box('user').clear();
+  }
 }
