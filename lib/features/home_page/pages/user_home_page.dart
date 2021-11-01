@@ -40,7 +40,13 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               Navigator.pushNamed(context, '/medical-history');
             },
-          )
+          ),
+          ListTile(
+            title: Text('Prescriptions'),
+            onTap: () {
+              Navigator.pushNamed(context, '/prescriptions');
+            },
+          ),
         ],
       )),
       appBar: AppBar(

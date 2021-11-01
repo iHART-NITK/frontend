@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
+import 'package:frontend/features/all_prescriptions/presentation/prescriptions.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -38,7 +39,8 @@ class IHARTApp extends StatelessWidget {
         '/admin/home': (context) => AdminHomePage(),
         '/emergency': (context) => GetLocations(),
         '/medical-history': (context) => GetMed(),
-        '/user-profile': (context) => UserProfilePage()
+        '/user-profile': (context) => UserProfilePage(),
+        '/prescriptions': (context) => AllPrescriptionsPage()
       },
       debugShowCheckedModeBanner: false,
     );
