@@ -48,9 +48,13 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                       }
                       if (snapshot.hasData) {
                         return Row(children: [
-                          Text('Date: ${snapshot.data?["date"]}'),
+                          Text('Date: ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text('${snapshot.data?["date"]}'),
                           Spacer(),
-                          Text('Doctor: ${snapshot.data?["doctor_name"]}'),
+                          Text('Doctor: Dr. ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text('${snapshot.data?["doctor_name"]}')
                         ]);
                       } else if (snapshot.hasError) {
                         return Row(children: [
@@ -64,6 +68,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                 SizedBox(
                   height: 10,
                 ),
+                Divider(),
                 Divider(),
                 SizedBox(
                   height: 10,
@@ -80,39 +85,48 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                       if (snapshot.hasData) {
                         List<Widget> rows = <Widget>[];
                         rows.add(Row(children: [
-                          Container(
-                              width: 200,
-                              child: Text("DIAGNOSIS",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))),
-                          Container(
-                              width: 200,
-                              child: Text("MEDICATION",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))),
-                          Container(
-                              width: 200,
-                              child: Text("DOSAGE",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))),
+                          Expanded(
+                              child: Column(children: [
+                            Text("DIAGNOSIS",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ])),
+                          Expanded(
+                              child: Column(children: [
+                            Text("MEDICATION",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ])),
+                          Expanded(
+                              child: Column(children: [
+                            Text("DOSAGE",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ])),
                         ]));
                         rows.add(Divider());
                         snapshot.data?.forEach((presc) {
                           rows.add(Row(children: [
-                            Container(
-                                width: 200, child: Text(presc["diagnosis"])),
-                            Container(
-                                width: 200, child: Text(presc["inventory"])),
-                            Container(width: 200, child: Text(presc["dosage"])),
+                            Expanded(
+                                child: Column(
+                                    children: [Text(presc["diagnosis"])])),
+                            Expanded(
+                                child: Column(
+                                    children: [Text(presc["inventory"])])),
+                            Expanded(
+                                child:
+                                    Column(children: [Text(presc["dosage"])])),
                           ]));
+                          rows.add(SizedBox(height: 10));
                         });
                         return Row(children: [
-                          Column(
+                          Expanded(
+                              child: Column(
                             children: rows,
-                          )
+                          ))
                         ]);
                       } else if (snapshot.hasError) {
                         return Row(children: [
@@ -126,93 +140,3 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
             ))));
   }
 }
-  /*
-        FutureBuilder<List<dynamic>>(
-            future: _response,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-              List<Widget> children;
-              if (snapshot.hasData) {
-                children = <Widget>[];
-                snapshot.data?.forEach((presc) {
-                  children.add(prescriptionCard(presc));
-                });
-              } else if (snapshot.hasError) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Color.fromRGBO(181, 7, 23, 1),
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Text('Error: ${snapshot.error}'),
-                  )
-                ];
-              } else {
-                children = const <Widget>[
-                  SizedBox(
-                    child: CircularProgressIndicator(),
-                    width: 60,
-                    height: 60,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting result...'),
-                  )
-                ];
-              }
-              return ListView(
-                controller: ScrollController(),
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                children: children,
-              );
-            }));
-  }
-}
-
-Widget prescriptionCard(presc) {
-  return Card(
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: SizedBox(
-                  width: 5,
-                ),
-              ),
-              Expanded(
-                  flex: 6,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'MEDICINE',
-                        style: TextStyle(fontSize: 10, color: Colors.grey),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        '${presc["inventory"].toString()}',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'DIAGNOSIS',
-                        style: TextStyle(fontSize: 8, color: Colors.grey),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        '${presc["diagnosis"]}',
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      ),
-                    ],
-                  )),
-                  */
