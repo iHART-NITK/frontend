@@ -52,7 +52,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -79,15 +79,33 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 2),
+    vsync: this,
+  )..repeat(reverse: true);
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.bounceOut,
+  );
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.black87,
       body: Center(
-        child: Container(
-          child: Image.asset(
-            "assets/anim.gif",
-          ),
+        child: ScaleTransition(
+          scale: _animation,
+          child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Image.asset(
+                'assets/iHART-logo.png',
+                width: 300,
+              )),
         ),
       ),
     );
