@@ -75,10 +75,12 @@ class _AllPrescriptionsPageState extends State<AllPrescriptionsPage> {
                 ];
               } else {
                 children = const <Widget>[
-                  SizedBox(
-                    child: CircularProgressIndicator(),
-                    width: 60,
-                    height: 60,
+                  Center(
+                    child: SizedBox(
+                      child: CircularProgressIndicator(),
+                      width: 60,
+                      height: 60,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 16),
