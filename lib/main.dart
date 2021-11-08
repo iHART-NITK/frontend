@@ -1,10 +1,11 @@
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
-import 'package:frontend/features/all_prescriptions/presentation/prescriptions.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/network/django_app.dart';
+import 'features/all_prescriptions/presentation/prescriptions.dart';
+import 'features/medical_history/presentation/medical_history_qr_page.dart';
 import 'features/home_page/pages/admin_home_page.dart';
 import 'features/home_page/pages/user_home_page.dart';
 import 'features/emergency/presentation/get_locations.dart';
@@ -40,7 +41,8 @@ class IHARTApp extends StatelessWidget {
         '/emergency': (context) => GetLocations(),
         '/medical-history': (context) => GetMed(),
         '/user-profile': (context) => UserProfilePage(),
-        '/prescriptions': (context) => AllPrescriptionsPage()
+        '/prescriptions': (context) => AllPrescriptionsPage(),
+        '/qr-code': (context) => MedicalHistoryQRPage(),
       },
       debugShowCheckedModeBanner: false,
     );

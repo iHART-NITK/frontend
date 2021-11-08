@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '/core/network/django_app.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,17 +16,20 @@ class MedicalHistoryQRPage extends StatefulWidget {
 
 class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
   Future<String> getQR() async {
-    Hive.openBox('user');
+    await Hive.openBox('user');
     var box = Hive.box('user');
     var bytes1 = utf8.encode(box.get(0).token);
     var digest1 = sha256.convert(bytes1);
+
     String userId = box.get(0).id.toString();
-    final response =
-        await http.post(Uri.parse('http://localhost:3000/'), body: {
+    String qrCodeURL = "https://ihart-qr.herokuapp.com/";
+
+    final response = await http.post(Uri.parse(qrCodeURL), body: {
       "data":
-          "http://localhost:8000/api/user/$userId/medical-history/html?token=${digest1.toString()}",
+          "http://${DjangoApp.host}:${DjangoApp.port}/api/user/$userId/medical-history/html?token=${digest1.toString()}",
       "ecl": "L"
     });
+    debugPrint("[API REQ] [POST] $qrCodeURL ${response.statusCode}");
     Map<String, dynamic> jsonSvg = jsonDecode(response.body);
     return jsonSvg["final_svg"];
     // DrawableRoot svgRoot =
@@ -42,9 +46,9 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('QR'),
-        backgroundColor: Colors.red,
-      ),
+          title: Text('QR'),
+          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
+          centerTitle: true),
       body: FutureBuilder(
         future: getQR(),
         builder: (context, snapshot) {
@@ -52,16 +56,16 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
             return CircularProgressIndicator();
           } else if (snapshot.hasData) {
             String svgFound = snapshot.data.toString();
-            print(svgFound);
+            // print(svgFound);
             int index = svgFound.indexOf('width="100%" height="100%"');
-            print(index);
+            // print(index);
             String s1 = svgFound.substring(0, index);
             int newindex = s1.indexOf("<svg");
             s1 = s1.substring(0, newindex + 4) +
                 ' width="500px" height="500px"' +
                 s1.substring(newindex + 4);
             String s2 = svgFound.substring(index + 27);
-            print(s1 + s2);
+            // print(s1 + s2);
             return Html(data: s1 + s2);
           } else
             return Center(child: Text('There was some error!'));

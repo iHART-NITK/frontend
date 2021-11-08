@@ -49,13 +49,10 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: Text('Medical History QR'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return MedicalHistoryQRPage();
-              }));
-            },
-          )
+              title: Text('Medical History QR'),
+              onTap: () {
+                Navigator.pushNamed(context, '/qr-code');
+              })
         ],
       )),
       appBar: AppBar(
