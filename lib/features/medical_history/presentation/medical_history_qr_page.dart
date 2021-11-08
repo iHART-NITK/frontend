@@ -27,7 +27,7 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
     final response = await http.post(Uri.parse(qrCodeURL), body: {
       "data":
           "http://${DjangoApp.host}:${DjangoApp.port}/api/user/$userId/medical-history/html?token=${digest1.toString()}",
-      "ecl": "L"
+      "ecl": "L", "test": true
     });
     debugPrint("[API REQ] [POST] $qrCodeURL ${response.statusCode}");
     Map<String, dynamic> jsonSvg = jsonDecode(response.body);
