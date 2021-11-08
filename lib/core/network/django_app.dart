@@ -3,10 +3,11 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
-  String host = "20.212.120.101";
-  String port = "80";
+  String host = "127.0.0.1";
+  String port = "8000";
 
   Future<http.Response> get(url, {userSpecific = false}) async {
+    print(url);
     var _addr;
     var box = Hive.box('user');
 
@@ -23,6 +24,7 @@ class DjangoApp {
   }
 
   Future<http.Response> post({url, data}) async {
+    print(url);
     var _addr;
     var box = Hive.box('user');
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/medical_history/presentation/medical_history_qr_page.dart';
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';
@@ -47,6 +48,14 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, '/prescriptions');
             },
           ),
+          ListTile(
+            title: Text('Medical History QR'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return MedicalHistoryQRPage();
+              }));
+            },
+          )
         ],
       )),
       appBar: AppBar(
