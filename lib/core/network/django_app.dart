@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class DjangoApp {
   static String host = "localhost";
-  static String port = "3000";
+  static String port = "8000";
 
   Future<http.Response> get(url, {userSpecific = false}) async {
     var _addr;

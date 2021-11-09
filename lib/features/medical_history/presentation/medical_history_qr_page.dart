@@ -22,14 +22,17 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
     var digest1 = sha256.convert(bytes1);
 
     String userId = box.get(0).id.toString();
-    String qrCodeURL = "https://ihart-qr.herokuapp.com/";
-
-    final response = await http.post(Uri.parse(qrCodeURL), body: {
+    print('req going');
+    final response =
+        await http.post(Uri.parse("https://ihart-qr.herokuapp.com/"), body: {
       "data":
-          "http://${DjangoApp.host}:${DjangoApp.port}/api/user/$userId/medical-history/html?token=${digest1.toString()}",
-      "ecl": "L", "test": true
+          "http://localhost:8000/api/user/$userId/medical-history/html?token=${digest1.toString()}",
+      "ecl": "L",
+      "test": "true"
     });
-    debugPrint("[API REQ] [POST] $qrCodeURL ${response.statusCode}");
+    print(response.body);
+    debugPrint(
+        "[API REQ] [POST] http://localhost:3000/ ${response.statusCode}");
     Map<String, dynamic> jsonSvg = jsonDecode(response.body);
     return jsonSvg["final_svg"];
     // DrawableRoot svgRoot =
@@ -41,7 +44,7 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
     // final Picture picture = svgRoot.toPicture();
     // return (svgRoot.toPicture().toImage(500, 500));
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +69,10 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
                 s1.substring(newindex + 4);
             String s2 = svgFound.substring(index + 27);
             // print(s1 + s2);
-            return Html(data: s1 + s2);
+            return Padding(
+              padding: const EdgeInsets.only(left: 500),
+              child: Center(child: Html(data: s1 + s2)),
+            );
           } else
             return Center(child: Text('There was some error!'));
         },
