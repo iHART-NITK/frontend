@@ -56,7 +56,7 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
         future: getQR(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData) {
             String svgFound = snapshot.data.toString();
             // print(svgFound);
