@@ -4,9 +4,8 @@ import 'package:frontend/core/network/django_app.dart';
 void main() {
   group('Django App', () {
     test('host and port name should be correct', () {
-      final djangoApp = DjangoApp();
-      expect(djangoApp.host, "10.0.2.2");
-      expect(djangoApp.port, "3000");
+      expect(DjangoApp.host, "10.0.2.2");
+      expect(DjangoApp.port, "3000");
     });
   });
 }

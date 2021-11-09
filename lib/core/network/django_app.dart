@@ -3,8 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
-  static String host = "localhost";
-  static String port = "8000";
+  static String host = "20.43.189.161";
+  static String port = "80";
 
   Future<http.Response> get(url, {userSpecific = false}) async {
     var _addr;

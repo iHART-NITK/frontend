@@ -34,7 +34,6 @@ class _GetLocationsState extends State<GetLocations> {
             if (snapshot.hasData) {
               List<DropdownMenuItem<String>> list =
                   new List.empty(growable: true);
-              print(snapshot.data);
 
               snapshot.data.forEach((key, label) {
                 currentLocationSelected.value = key;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/medical_history/presentation/medical_history_qr_page.dart';
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';

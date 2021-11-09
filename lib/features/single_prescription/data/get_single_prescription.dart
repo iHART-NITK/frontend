@@ -10,7 +10,6 @@ class GetSinglePrescription {
     List<dynamic> decodedResponse =
         convert.jsonDecode(_response.body) as List<dynamic>;
 
-    print(decodedResponse);
     return decodedResponse;
   }
 }
@@ -24,7 +23,6 @@ class GetAppointmentInfo {
     Map<String, dynamic> decodedResponse =
         convert.jsonDecode(_response.body) as Map<String, dynamic>;
 
-    print(decodedResponse);
     return decodedResponse;
   }
 }

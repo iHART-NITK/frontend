@@ -11,11 +11,9 @@ class History {
   Future<dynamic> getMed() async {
     final response =
         await DjangoApp().get('/medical-history', userSpecific: true);
-    print(response);
     var medicalHash = convert.jsonDecode(response.body) as List<dynamic>;
     HistoryModel m = new HistoryModel();
     dynamic x = m.getLocationObjectsFromJson(medicalHash);
-    print(x);
     return x;
   }
 
@@ -26,11 +24,9 @@ class History {
     var digest1 = sha256.convert(bytes1);
     final response = await DjangoApp()
         .get('/medical-history/html?token=$digest1', userSpecific: true);
-    print(response);
     var medicalHash = convert.jsonDecode(response.body) as List<dynamic>;
     HistoryModel m = new HistoryModel();
     dynamic x = m.getLocationObjectsFromJson(medicalHash);
-    print(x);
     return x;
   }
 }

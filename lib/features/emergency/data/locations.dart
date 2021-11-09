@@ -8,7 +8,6 @@ class Location {
         await DjangoApp().get('/emergency/locations/', userSpecific: false);
     var locationHash =
         convert.jsonDecode(response.body) as Map<String, dynamic>;
-    print(locationHash);
     LocationModel m = new LocationModel();
     Map<String, String> x = m.getLocationObjectsFromJson(locationHash);
     return x;

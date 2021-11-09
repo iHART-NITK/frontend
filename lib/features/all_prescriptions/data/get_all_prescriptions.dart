@@ -9,7 +9,6 @@ class GetPrescriptionAppointments {
     List<dynamic> decodedResponse =
         convert.jsonDecode(_response.body) as List<dynamic>;
 
-    print(decodedResponse);
     return decodedResponse;
   }
 }

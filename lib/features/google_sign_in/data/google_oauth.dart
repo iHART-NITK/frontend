@@ -100,7 +100,6 @@ class GoogleOAuth {
           Map<String, dynamic> decodedRegResponse =
               convert.jsonDecode(_regResponse.body) as Map<String, dynamic>;
 
-          print(decodedRegResponse);
           await box.clear();
           box.add(User(decodedRegResponse["id"], decodedRegResponse["token"],
               decodedRegResponse["user_type"]));

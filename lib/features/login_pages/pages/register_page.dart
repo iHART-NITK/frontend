@@ -155,7 +155,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   ElevatedButton.icon(
                       onPressed: () {
-                        print("pressed!");
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _body.addAll({
