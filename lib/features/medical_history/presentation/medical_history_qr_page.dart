@@ -51,7 +51,18 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
           } else if (snapshot.hasData) {
             return Center(
                 child: SvgPicture.network(
-                    "https://api.qrserver.com/v1/create-qr-code/?size=400x400&format=svg&data=http://${DjangoApp.host}:${DjangoApp.port}/api/user/${snapshot.data![1]}/medical-history/html?token=${snapshot.data![0].toString()}"));
+              "https://api.qrserver.com/v1/create-qr-code/?size=400x400&format=svg&data=http://${DjangoApp.host}:${DjangoApp.port}/api/user/${snapshot.data![1]}/medical-history/html?token=${snapshot.data![0].toString()}",
+              placeholderBuilder: (context) {
+                return Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text("Fetching QR...")
+                  ],
+                ));
+              },
+            ));
           } else
             return Center(child: Text('There was some error!'));
         },

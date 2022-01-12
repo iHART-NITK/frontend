@@ -10,7 +10,7 @@ import 'dart:convert' as convert;
 class History {
   Future<dynamic> getMed() async {
     final response =
-        await DjangoApp().get('/medical-history', userSpecific: true);
+        await DjangoApp().get('/medical-history/', userSpecific: true);
     var medicalHash = convert.jsonDecode(response.body) as List<dynamic>;
     HistoryModel m = new HistoryModel();
     dynamic x = m.getLocationObjectsFromJson(medicalHash);
