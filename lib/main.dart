@@ -1,6 +1,5 @@
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/network/django_app.dart';
@@ -13,6 +12,7 @@ import 'features/google_sign_in/data/model/user_model.dart';
 import 'features/login_pages/pages/login_page.dart';
 import 'features/medical_history/presentation/get_Medical-history.dart';
 import 'features/user_profile/pages/user_page.dart';
+import 'features/documents/presentation/render_pdf_document.dart';
 
 void main() async {
   // Hive Setup
@@ -43,6 +43,7 @@ class IHARTApp extends StatelessWidget {
         '/user-profile': (context) => UserProfilePage(),
         '/prescriptions': (context) => AllPrescriptionsPage(),
         '/qr-code': (context) => MedicalHistoryQRPage(),
+        '/doc': (context) => DocumentPage()
       },
       debugShowCheckedModeBanner: false,
     );

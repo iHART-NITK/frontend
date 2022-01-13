@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
+// ignore: must_be_immutable
 class RegisterPage extends StatefulWidget {
   late Map<String, dynamic> _body;
   RegisterPage({Key? key, required Map<String, dynamic> body})
