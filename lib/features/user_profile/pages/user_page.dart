@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
 import '/features/user_profile/data/fetch_user.dart';
 import '/core/network/django_app.dart';
 
@@ -14,10 +15,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     FetchUserData _fetchUserData = new FetchUserData();
     final Future<Map<String, dynamic>> _response = _fetchUserData.getData();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("User Page"),
-        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-      ),
+      appBar: AppBar(title: Text("User Page")),
       body: FutureBuilder(
           future: _response,
           builder: (BuildContext context,

@@ -28,11 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Registration"),
-          centerTitle: true,
-          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-        ),
+        appBar: AppBar(title: Text("Registration")),
         body: Center(
           child: Form(
               key: _formKey,

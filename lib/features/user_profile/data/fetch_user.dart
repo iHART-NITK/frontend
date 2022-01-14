@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:frontend/core/network/django_app.dart';
+import '/core/network/django_app.dart';
 
 class FetchUserData {
   Future<Map<String, dynamic>> getData() async {

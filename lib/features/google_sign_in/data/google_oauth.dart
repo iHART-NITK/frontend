@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/network/django_app.dart';
-import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
-import 'package:frontend/features/login_pages/pages/register_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'dart:convert' as convert;
+
+import '/features/login_pages/pages/register_page.dart';
+import '/features/google_sign_in/data/model/user_model.dart';
+import '/core/network/django_app.dart';
 
 class GoogleOAuth {
   GoogleSignIn googleSignIn = GoogleSignIn();
@@ -37,8 +38,8 @@ class GoogleOAuth {
         "customer_id": googleSignIn.currentUser!.id
       };
 
-      var _response =
-          await _djangoApp.postAnonymous(url: "/verify-user/", data: _data);
+      var _response = await _djangoApp.post(
+          url: "/verify-user/", data: _data, isAnonymous: true);
       Map<String, dynamic> decodedResponse =
           convert.jsonDecode(_response.body) as Map<String, dynamic>;
 
@@ -94,8 +95,8 @@ class GoogleOAuth {
               MaterialPageRoute(
                   builder: (context) => RegisterPage(body: data)));
 
-          var _regResponse =
-              await _djangoApp.postAnonymous(url: '/register/', data: data);
+          var _regResponse = await _djangoApp.post(
+              url: '/register/', data: data, isAnonymous: true);
 
           Map<String, dynamic> decodedRegResponse =
               convert.jsonDecode(_regResponse.body) as Map<String, dynamic>;
