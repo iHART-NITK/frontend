@@ -37,11 +37,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             fontWeight: FontWeight.w500))),
               ])),
           ListTile(
-            title: Text('Medical History'),
-            onTap: () {
-              Navigator.pushNamed(context, '/medical-history');
-            },
-          )
+              title: Text('Medical History'),
+              onTap: () {
+                Navigator.pushNamed(context, '/medical-history');
+              }),
+          ListTile(
+              title: Text('Documents'),
+              onTap: () {
+                Navigator.pushNamed(context, '/docs');
+              })
         ],
       )),
       appBar: AppBar(

@@ -52,11 +52,6 @@ class _HomePageState extends State<HomePage> {
               title: Text('Medical History QR'),
               onTap: () {
                 Navigator.pushNamed(context, '/qr-code');
-              }),
-          ListTile(
-              title: Text('Documents'),
-              onTap: () {
-                Navigator.pushNamed(context, '/docs');
               })
         ],
       )),

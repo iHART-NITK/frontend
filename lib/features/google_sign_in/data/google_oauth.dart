@@ -9,14 +9,18 @@ import '/features/google_sign_in/data/model/user_model.dart';
 import '/core/network/django_app.dart';
 
 class GoogleOAuth {
-  GoogleSignIn googleSignIn = GoogleSignIn();
-
-  GoogleOAuth({required this.googleSignIn});
+  GoogleSignIn googleSignIn = new GoogleSignIn(scopes: [
+    'email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+  ]);
 
   String checkUserType(String email) {
     RegExp rollNoRegex = new RegExp('[1-9][0-9][0-9][a-z]{2}[0-9]{3}');
     String username = email.split('@')[0];
     String domain = email.split('@').last;
+    // if (username == "nishantnayak2001") {
+    //   return "Sta";
+    // }
     if (domain != "nitk.edu.in") {
       return "";
     }
@@ -118,7 +122,7 @@ class GoogleOAuth {
     }
   }
 
-  Future<void> _handleSignOut() async {
+  Future<void> handleSignOut() async {
     googleSignIn.disconnect();
     await Hive.box('user').clear();
   }

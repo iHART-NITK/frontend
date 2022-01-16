@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 class DjangoApp {
-  static String host = "10.0.2.2";
+  static String host = kIsWeb ? "localhost" : "10.0.2.2";
   static String port = "8000";
 
   // Function to make GET Requests
