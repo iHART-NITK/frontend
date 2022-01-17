@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/network/django_app.dart';
-import 'package:frontend/features/google_sign_in/data/model/user_model.dart';
-import 'package:frontend/features/login_pages/pages/register_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'dart:convert' as convert;
 
-class GoogleOAuth {
-  GoogleSignIn googleSignIn = GoogleSignIn();
+import '/features/login_pages/pages/register_page.dart';
+import '/features/google_sign_in/data/model/user_model.dart';
+import '/core/network/django_app.dart';
 
-  GoogleOAuth({required this.googleSignIn});
+class GoogleOAuth {
+  GoogleSignIn googleSignIn = new GoogleSignIn(scopes: [
+    'email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+  ]);
 
   String checkUserType(String email) {
     RegExp rollNoRegex = new RegExp('[1-9][0-9][0-9][a-z]{2}[0-9]{3}');
     String username = email.split('@')[0];
     String domain = email.split('@').last;
+    // if (username == "nishantnayak2001") {
+    //   return "Sta";
+    // }
     if (domain != "nitk.edu.in") {
       return "";
     }
@@ -37,8 +42,8 @@ class GoogleOAuth {
         "customer_id": googleSignIn.currentUser!.id
       };
 
-      var _response =
-          await _djangoApp.postAnonymous(url: "/verify-user/", data: _data);
+      var _response = await _djangoApp.post(
+          url: "/verify-user/", data: _data, isAnonymous: true);
       Map<String, dynamic> decodedResponse =
           convert.jsonDecode(_response.body) as Map<String, dynamic>;
 
@@ -94,8 +99,8 @@ class GoogleOAuth {
               MaterialPageRoute(
                   builder: (context) => RegisterPage(body: data)));
 
-          var _regResponse =
-              await _djangoApp.postAnonymous(url: '/register/', data: data);
+          var _regResponse = await _djangoApp.post(
+              url: '/register/', data: data, isAnonymous: true);
 
           Map<String, dynamic> decodedRegResponse =
               convert.jsonDecode(_regResponse.body) as Map<String, dynamic>;
@@ -117,7 +122,7 @@ class GoogleOAuth {
     }
   }
 
-  Future<void> _handleSignOut() async {
+  Future<void> handleSignOut() async {
     googleSignIn.disconnect();
     await Hive.box('user').clear();
   }

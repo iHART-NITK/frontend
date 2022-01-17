@@ -1,11 +1,9 @@
-import 'dart:convert';
-
-import 'package:frontend/features/medical_history/data/model/medical_history_model.dart';
-import '../../../core/network/django_app.dart';
+import 'dart:convert' as convert;
 import 'package:crypto/crypto.dart';
 import 'package:hive/hive.dart';
 
-import 'dart:convert' as convert;
+import '/core/network/django_app.dart';
+import '/features/medical_history/data/model/medical_history_model.dart';
 
 class History {
   Future<dynamic> getMed() async {
@@ -20,7 +18,7 @@ class History {
   Future<dynamic> getQR() async {
     Hive.openBox('user');
     var box = Hive.box('user');
-    var bytes1 = utf8.encode(box.get(0).token);
+    var bytes1 = convert.utf8.encode(box.get(0).token);
     var digest1 = sha256.convert(bytes1);
     final response = await DjangoApp()
         .get('/medical-history/html?token=$digest1', userSpecific: true);

@@ -41,6 +41,7 @@ dependencies:
   enum_to_string: ^2.0.1
   flutter_html: ^2.1.5
   flutter_svg: ^0.23.0+1
+  syncfusion_flutter_pdfviewer: ^19.4.42-beta
 
 dev_dependencies:
   flutter_test:

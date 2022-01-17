@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
-import 'package:frontend/features/emergency/data/model/location_model.dart';
-import '../../../core/network/django_app.dart';
+
+import '/features/emergency/data/model/location_model.dart';
+import '/core/network/django_app.dart';
 
 class Location {
   Future<Map<String, String>> getLocations() async {

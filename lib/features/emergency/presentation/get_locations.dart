@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/network/django_app.dart';
-import 'package:frontend/features/emergency/data/locations.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
+import '/core/network/django_app.dart';
+import '/features/emergency/data/locations.dart';
 
 class GetLocations extends StatefulWidget {
   @override
@@ -22,10 +23,7 @@ class _GetLocationsState extends State<GetLocations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Emergency Locations'),
-        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-      ),
+      appBar: AppBar(title: const Text('Emergency Locations')),
       body: FutureBuilder<Map<String, String>>(
           future:
               getLocations(), // a previously-obtained Future<String> or null

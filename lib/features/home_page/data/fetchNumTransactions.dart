@@ -1,5 +1,5 @@
 import 'dart:convert' as convert;
-import 'package:frontend/core/network/django_app.dart';
+import '/core/network/django_app.dart';
 
 class FetchNumTransactions {
   Future<int> get() async {
@@ -11,6 +11,7 @@ class FetchNumTransactions {
     return decodedResponse.length;
   }
 }
+
 class FetchAllTransactions {
   Future<int> get() async {
     DjangoApp _djangoGet = new DjangoApp();

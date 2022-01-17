@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/single_prescription/data/get_single_prescription.dart';
+
+import '/features/single_prescription/data/get_single_prescription.dart';
 
 class PrescriptionPage extends StatefulWidget {
   final int appointmentNo;
@@ -16,10 +17,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
     final Future<Map<String, dynamic>> _appointmentResponse =
         GetAppointmentInfo().getData(widget.appointmentNo);
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Prescription'),
-          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-        ),
+        appBar: AppBar(title: const Text('Prescription')),
         body: Container(
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(10),

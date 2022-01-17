@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';
@@ -56,8 +57,6 @@ class _HomePageState extends State<HomePage> {
       )),
       appBar: AppBar(
         title: Text("iHART"),
-        centerTitle: true,
-        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
         actions: [
           IconButton(
             onPressed: () {

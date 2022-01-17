@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+
 import '/core/network/django_app.dart';
 
 class MedicalHistoryQRPage extends StatefulWidget {
@@ -39,10 +39,7 @@ class _MedicalHistoryQRPageState extends State<MedicalHistoryQRPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text('QR'),
-          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-          centerTitle: true),
+      appBar: AppBar(title: Text('QR')),
       body: FutureBuilder(
         future: getQR(true),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {

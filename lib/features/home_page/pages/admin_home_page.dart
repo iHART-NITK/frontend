@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '/features/home_page/data/fetchNumEmergency.dart';
 import '/features/home_page/data/fetchNumAppointments.dart';
 import '/features/home_page/data/fetchNumTransactions.dart';
@@ -36,17 +37,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             fontWeight: FontWeight.w500))),
               ])),
           ListTile(
-            title: Text('Medical History'),
-            onTap: () {
-              Navigator.pushNamed(context, '/medical-history');
-            },
-          )
+              title: Text('Medical History'),
+              onTap: () {
+                Navigator.pushNamed(context, '/medical-history');
+              }),
+          ListTile(
+              title: Text('Documents'),
+              onTap: () {
+                Navigator.pushNamed(context, '/docs');
+              })
         ],
       )),
       appBar: AppBar(
         title: Text("iHART ADMIN"),
-        centerTitle: true,
-        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
         actions: [
           IconButton(
             onPressed: () {

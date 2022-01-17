@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
 import '/features/user_profile/data/fetch_user.dart';
 import '/core/network/django_app.dart';
+import '/features/google_sign_in/data/google_oauth.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -14,10 +15,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     FetchUserData _fetchUserData = new FetchUserData();
     final Future<Map<String, dynamic>> _response = _fetchUserData.getData();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("User Page"),
-        backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-      ),
+      appBar: AppBar(title: Text("User Page")),
       body: FutureBuilder(
           future: _response,
           builder: (BuildContext context,
@@ -95,7 +93,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           onPressed: () async {
             DjangoApp _djangoApp = new DjangoApp();
             await _djangoApp.post(url: '/logout/', data: {});
-            await Hive.box('user').clear();
+            await GoogleOAuth().handleSignOut();
             Navigator.pushNamedAndRemoveUntil(
                 context, '/login', (route) => false);
           },

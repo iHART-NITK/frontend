@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 
+// ignore: must_be_immutable
 class RegisterPage extends StatefulWidget {
   late Map<String, dynamic> _body;
   RegisterPage({Key? key, required Map<String, dynamic> body})
@@ -27,11 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Registration"),
-          centerTitle: true,
-          backgroundColor: Color.fromRGBO(181, 7, 23, 1),
-        ),
+        appBar: AppBar(title: Text("Registration")),
         body: Center(
           child: Form(
               key: _formKey,
