@@ -54,9 +54,13 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-  </script>  
+  </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+    <script type="text/javascript">
+       pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+    </script>
   <script>
-    var serviceWorkerVersion = '1575387581';
+    var serviceWorkerVersion = '3900457295';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
