@@ -15,12 +15,14 @@ class GoogleOAuth {
   ]);
 
   String checkUserType(String email) {
+    List<String> adminEmails = ["nishantnayak2001@gmail.com"];
+
     RegExp rollNoRegex = new RegExp('[1-9][0-9][0-9][a-z]{2}[0-9]{3}');
     String username = email.split('@')[0];
     String domain = email.split('@').last;
-    // if (username == "nishantnayak2001") {
-    //   return "Sta";
-    // }
+    if (adminEmails.contains(email)) {
+      return "Sta";
+    }
     if (domain != "nitk.edu.in") {
       return "";
     }
